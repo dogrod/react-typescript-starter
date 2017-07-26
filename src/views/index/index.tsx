@@ -35,8 +35,6 @@ class Index extends React.Component<{}, {}> {
           Like Count: {this.state.liked}
         </div>
         <LikeButton add={this.handleClickAdd} minus={this.handleClickCancel}/>
-        <LikeButton add={this.handleClickAdd} minus={this.handleClickCancel}/>
-        <LikeButton add={this.handleClickAdd} minus={this.handleClickCancel}/>
       </div>
     )
   }

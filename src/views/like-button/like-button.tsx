@@ -23,26 +23,22 @@ export default class LikeButton extends React.Component<Props, State> {
 
   render() {
     return (
-      <button className="like-button" onClick={this.handleClickLikeButton}>
-        👍
-        {this.state.isLiked
-          ? 'cancel'
-          : 'like'
-        }
-      </button>
+      <div>
+        <button className="like-button" onClick={this.handleClickLike}>
+          👍 like
+        </button>
+        <button className="like-button" onClick={this.handleClickDislike}>
+          👎 dislike
+        </button>
+      </div>
     )
   }
 
-  private handleClickLikeButton = () => {
-    this.setState((prevState: State): State => {
-      if (!prevState.isLiked) {
-        this.props.add()
-      } else {
-        this.props.minus()
-      }
-      return {
-        isLiked: !prevState.isLiked
-      }
-    })
+  private handleClickLike = () => {
+    this.props.add()
+  }
+
+  private handleClickDislike = () => {
+    this.props.minus()
   }
 }
