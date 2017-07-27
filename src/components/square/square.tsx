@@ -2,7 +2,8 @@ import * as React from 'react'
 import './square.css'
 
 interface SquareProps {
-  value: number
+  value: string | null,
+  onClick: Function
 }
 
 interface State {
@@ -28,8 +29,11 @@ export default class Square extends React.Component<SquareProps, State> {
 
   render(): JSX.Element {
     return (
-      <button className="square" onClick={this.handleOnClick}>
-        {this.state.value}
+      <button
+        className="square"
+        onClick={() => {this.props.onClick()}}
+      >
+        {this.props.value}
       </button>
     )
   }
