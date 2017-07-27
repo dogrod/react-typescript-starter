@@ -1,14 +1,35 @@
 import * as React from 'react'
+import './square.css'
 
 interface SquareProps {
   value: number
 }
 
-export default class Square extends React.Component<SquareProps, {}> {
+interface State {
+  value?: string | null
+}
+
+export default class Square extends React.Component<SquareProps, State> {
+  state: State = {
+    value: null
+  }
+
+  constructor() {
+    // super(): call the parent constructor 
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
+    super()
+  }
+
+  handleOnClick = () => {
+    this.setState({
+      value: 'X'
+    })
+  }
+
   render(): JSX.Element {
     return (
-      <button className="square">
-        {this.props.value}
+      <button className="square" onClick={this.handleOnClick}>
+        {this.state.value}
       </button>
     )
   }
