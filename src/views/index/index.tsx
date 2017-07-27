@@ -7,12 +7,12 @@ interface State {
   liked: number
 }
 
-class Index extends React.Component<{}, {}> {
+class Index extends React.Component<{}, State> {
   state: State = {
     liked: 0,
   }
 
-  handleClickAdd = () => {
+  handleOnLike = () => {
     this.setState((prevState: State): State => {
       return {
         liked: prevState.liked + 1,
@@ -20,7 +20,7 @@ class Index extends React.Component<{}, {}> {
     })
   }
 
-  handleClickCancel = () => {
+  handleOnDislike = () => {
     this.setState((prevState: State): State => {
       return {
         liked: prevState.liked - 1,
@@ -35,8 +35,8 @@ class Index extends React.Component<{}, {}> {
           Like Count: {this.state.liked}
         </div>
         <LikeButton 
-          onLike={this.handleClickAdd} 
-          onDislike={this.handleClickCancel}
+          onLike={this.handleOnLike} 
+          onDislike={this.handleOnDislike}
         />
       </div>
     )

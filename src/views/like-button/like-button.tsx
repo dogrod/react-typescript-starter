@@ -1,14 +1,14 @@
 import * as React from 'react'
 import './like-button.css'
 
-interface Props {
+interface LikeButtonProps {
   like?: string,
   dislike?: string,
   onLike: Function,
   onDislike: Function,
 }
 
-const LikeButton: React.SFC<Props> = (props) => {
+const LikeButton: React.SFC<LikeButtonProps> = (props) => {
   return (
     <div>
       <button
