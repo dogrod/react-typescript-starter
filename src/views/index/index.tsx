@@ -1,43 +1,14 @@
 import * as React from 'react'
 import './index.css'
 
-import LikeButton from '../like-button/like-button'
+import Game from '../../components/game/game'
 
-interface State {
-  liked: number
-}
-
-class Index extends React.Component<{}, State> {
-  state: State = {
-    liked: 0,
-  }
-
-  handleOnLike = () => {
-    this.setState((prevState: State): State => {
-      return {
-        liked: prevState.liked + 1,
-      }
-    })
-  }
-
-  handleOnDislike = () => {
-    this.setState((prevState: State): State => {
-      return {
-        liked: prevState.liked - 1,
-      }
-    })
-  }
+class Index extends React.Component<{}, {}> {
 
   render(): JSX.Element {
     return (
       <div className="index">
-        <div>
-          Like Count: {this.state.liked}
-        </div>
-        <LikeButton 
-          onLike={this.handleOnLike} 
-          onDislike={this.handleOnDislike}
-        />
+        <Game />
       </div>
     )
   }
