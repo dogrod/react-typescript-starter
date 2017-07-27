@@ -28,13 +28,16 @@ class Index extends React.Component<{}, {}> {
     })
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className="index">
         <div>
           Like Count: {this.state.liked}
         </div>
-        <LikeButton add={this.handleClickAdd} minus={this.handleClickCancel}/>
+        <LikeButton 
+          onLike={this.handleClickAdd} 
+          onDislike={this.handleClickCancel}
+        />
       </div>
     )
   }
