@@ -6,7 +6,7 @@ export default class Board extends React.Component<{}, {}> {
 
   // returns a square function
   renderSquare(i: number): JSX.Element {
-    return <Square />
+    return <Square value={i} />
   }
 
   render(): JSX.Element {
