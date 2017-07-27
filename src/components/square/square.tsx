@@ -22,16 +22,14 @@ export default class Square extends React.Component<SquareProps, State> {
   }
 
   handleOnClick = () => {
-    this.setState({
-      value: 'X'
-    })
+    this.props.onClick()
   }
 
   render(): JSX.Element {
     return (
       <button
         className="square"
-        onClick={() => {this.props.onClick()}}
+        onClick={this.handleOnClick}
       >
         {this.props.value}
       </button>
