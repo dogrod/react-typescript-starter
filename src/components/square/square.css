@@ -3,3 +3,9 @@
   height: 40px;
   box-sizing: border-box;
 } 
+
+.square:after {
+  content: '';
+  clear: both;
+  display: inline-block;
+}

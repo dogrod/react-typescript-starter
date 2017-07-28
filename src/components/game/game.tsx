@@ -9,6 +9,7 @@ type squareType = string | null
 
 interface State {
   history: Array<historyType>,
+  stepNumber: number,
   xIsNext: boolean,
 }
 
@@ -38,6 +39,7 @@ export default class Game extends React.Component<{}, State> {
     history: [{
       squares: Array(9).fill(null)
     }],
+    stepNumber: 0,
     xIsNext: true
   }
 
@@ -46,7 +48,7 @@ export default class Game extends React.Component<{}, State> {
   }
 
   handleClick = (i: number) => {
-    const history = this.state.history
+    const history = this.state.history.slice(0, this.state.stepNumber + 1)
     const current = history[history.length - 1]
     const squares = current.squares.slice()
     if (calculateWinner(squares || squares[i])) {
@@ -58,17 +60,21 @@ export default class Game extends React.Component<{}, State> {
       history: history.concat([{
         squares,
       }]),
+      stepNumber: history.length,
       xIsNext: !this.state.xIsNext
     })
   }
 
-  jumpTo = (move: number) => {
-    alert(move)
+  jumpTo = (step: number) => {
+    this.setState({
+      stepNumber: step,
+      xIsNext: (step % 2) === 0
+    })
   }
 
   render(): JSX.Element {
     const history = this.state.history
-    const current = history[history.length - 1]
+    const current = history[this.state.stepNumber]
     const winner = calculateWinner(current.squares)
 
     // move history
@@ -77,7 +83,7 @@ export default class Game extends React.Component<{}, State> {
         ? `Move #${move}` 
         : 'Game Start'
       return (
-        <li>
+        <li key={move}>
           <a href="#" onClick={() => this.jumpTo(move)} >{desc}</a>
         </li>
       )

@@ -18,7 +18,7 @@ export default class Square extends React.Component<SquareProps, State> {
   }
 
   constructor() {
-    // super(): call the parent constructor 
+    // super(): call the parent constructor
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
     super()
   }
