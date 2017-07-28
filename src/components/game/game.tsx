@@ -45,7 +45,7 @@ export default class Game extends React.Component<{}, State> {
     super()
   }
 
-  handleClick(i: number) {
+  handleClick = (i: number) => {
     const history = this.state.history
     const current = history[history.length - 1]
     const squares = current.squares.slice()
@@ -62,11 +62,28 @@ export default class Game extends React.Component<{}, State> {
     })
   }
 
+  jumpTo = (move: number) => {
+    alert(move)
+  }
+
   render(): JSX.Element {
     const history = this.state.history
     const current = history[history.length - 1]
     const winner = calculateWinner(current.squares)
 
+    // move history
+    const moves = history.map((step, move): JSX.Element => {
+      const desc: string = move
+        ? `Move #${move}` 
+        : 'Game Start'
+      return (
+        <li>
+          <a href="#" onClick={() => this.jumpTo(move)} >{desc}</a>
+        </li>
+      )
+    })
+
+    // game status
     let status
     if (winner) {
       status = `Winner: ${winner}`
@@ -84,7 +101,7 @@ export default class Game extends React.Component<{}, State> {
         </div>
         <div className="game__info">
           <div>{status}</div>
-          <div>{/* TODO */}</div>
+          <ol>{moves}</ol>
         </div>
       </div>
     )
