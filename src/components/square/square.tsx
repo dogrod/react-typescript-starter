@@ -1,13 +1,15 @@
 import * as React from 'react'
 import './square.css'
 
+type squareType = string | null
+
 interface SquareProps {
-  value: string | null,
+  value: squareType,
   onClick: Function
 }
 
 interface State {
-  value?: string | null
+  value?: squareType
 }
 
 export default class Square extends React.Component<SquareProps, State> {

@@ -1,73 +1,37 @@
 import * as React from 'react'
 import Square from '../square/square'
 
+type squareType = string | null
+
+interface BoardProps {
+  squares: Array<squareType>,
+  onClick: Function
+}
+
 interface State {
-  squares: Array<string | null>,
+  squares: Array<squareType>,
   xIsNext: boolean
 }
 
-const calculateWinner = (squares: Array<string | null>): string | null => {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ]
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i]
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a]
-    }
-  }
-  return null
-}
-
-export default class Board extends React.Component<{}, State> {
+export default class Board extends React.Component<BoardProps, State> {
   state: State = {
     squares: Array(9).fill(null),
     xIsNext: true
-  }
-
-  handleClick(i: number) {
-    const squares = this.state.squares.slice()
-    if (calculateWinner(squares || squares[i])) {
-      return
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O'
-
-    this.setState({
-      squares,
-      xIsNext: !this.state.xIsNext
-    })
   }
 
   // returns a square function
   renderSquare(i: number): JSX.Element {
     return (
       <Square 
-        value={this.state.squares[i]} 
-        onClick={() => this.handleClick(i)}
+        value={this.props.squares[i]} 
+        onClick={() => this.props.onClick(i)}
       />
     )
   }
 
   render(): JSX.Element {
-    const winner = calculateWinner(this.state.squares)
-    let status
-    if (winner) {
-      status = `Winner: ${winner}`
-    } else {
-      status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`
-    }
-
     return (
       <div>
-        <div className="board__status">{status}</div>
         <div className="board__row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
